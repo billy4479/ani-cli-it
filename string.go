@@ -8,7 +8,7 @@ func StringOption(desc string, continueAskingUntil func(string) bool) (string, e
 		continueAskingUntil = func(s string) bool { return s != "" }
 	}
 
-	for !continueAskingUntil(input) {
+	for ok := true; ok; ok = !continueAskingUntil(input) {
 		color.New(color.FgBlue).Printf("[?] %s: ", desc)
 		var err error
 		input, err = readLine()
